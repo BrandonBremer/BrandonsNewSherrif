@@ -1,0 +1,116 @@
+<!-- shop/templates/shop/checkout.html -->
+
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+   body {background:#a9cce3}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: #727A94;
+    color:#ffffff;
+}
+button:hover {
+  background-color: #727A94;
+  color: white;
+}
+</style>
+</head>
+<header>
+    <ul style="list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color:#285C6A;">
+        <li style="float: left;"><a href="/">Home Page</a></li>
+        <li style="float: left;"><a href="/shop/">Shop!</a></li>
+        <li style="float: left;"><a href="/shop/allposts">Posts</a></li>
+    </ul>
+</header>
+{% if user.is_authenticated %}
+
+<body>
+
+<script type="text/javascript">
+
+function getCookieValue(name) {
+    var b = document.cookie.match('(^|[^;]+)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
+
+cart = JSON.parse(unescape(getCookieValue("cart")));
+
+cart_names = cart.map((item) => {
+    return item.item_name;
+  });
+
+
+cost = cart.reduce(function(accumulator, obj, currentIndex, array) {
+    price = parseFloat(obj.item_price);
+    total = parseFloat(accumulator);
+  return (total + price).toFixed(2);
+  }, 0);
+
+window.onload = function() { 
+    document.getElementById("cart").innerHTML = cart_names;
+    document.getElementById("cost").innerHTML = "$" +cost;
+    document.getElementById("form_cart").setAttribute("value", JSON.stringify(cart));
+};
+
+
+</script>
+<div style="display: grid; grid-template-columns: 35% 75%; margin-top: 30px;">
+  <div style="text-align: center; padding-top: 50px; font-size: 30px;">
+    <div><p style="margin-top:10px;">Your Cart Is: </p>
+      <div id = "cart" style="margin-top:10px;">
+      </div>
+    </div>
+    <div><p style="margin-top:10px;">Your Estimated Cost Is: </p>
+      <div id = "cost" style="margin-top:10px;">
+      </div>
+      <div id = "ids"></div>
+    </div>
+  </div>
+  <div style="padding-left: 100px; ">
+<form method="POST">
+    {% csrf_token %}
+ <p style="margin-top:10px;">What Bounty Are You Placing On Your Order?:<br></p>
+  {{post_form.bounty}}
+  <p style="margin-top:10px;">When are you available to recieve your order?(Please enter date in form (mm/dd/yyyy):<br></p>
+  {{post_form.daterequested}}
+  <p style="margin-top:10px;">Where would you like to recieve your order?:<br></p>
+  {{post_form.location}}
+    <p style="margin-top:10px;">What area are you in?:<br></p>
+  {{post_form.general_location}}
+  <input type="hidden" id="form_cart" name="cart">
+  <br/>
+
+   <input style="margin-top:10px; padding: 6px 15px; font: bold 15px arial, helvetica, sans-serif; border-radius: 15px;border: 2px solid #bbb; background-color: #ddd;" type="submit" value="Submit">
+   
+</form>
+  </div>
+</div>
+</body>
+{% else %}
+<body>
+    You need to sign in!
+</body>
+{% endif %}
+
+
+</html>
+

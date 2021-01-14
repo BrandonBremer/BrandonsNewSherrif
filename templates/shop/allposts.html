@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+   body {background:#a9cce3}
+ </style>
+<body>
+    <h1 style="font-family: 'Courier New',Georgia;font-weight:bold;">All Posts</h1>
+<form action="/shop/allposts/filter" method ="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Submit">
+</form>
+    <ul>
+        {% for post in object_list %}
+        {% include "shop/post.html" with post=post %}    
+        {% endfor %}
+    </ul>
+ </body>
+{% endblock %}

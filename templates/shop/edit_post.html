@@ -1,0 +1,21 @@
+<!-- shop/templates/edit_post.html -->
+{% extends 'base.html' %}
+{% block title %}Edit Post{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+   body {background: linear-gradient(to bottom,   #a9cce3
+ ,  #d6eaf8 )}
+ </style>
+    <div style="margin: 25px 50px 350px; text-align: center; padding-top: 40px">
+<form method="post">
+    {% csrf_token %}
+    <p>Location:<br/> {{ post.location }}</p>
+    <p>Date Requested:<br/> {{ post.daterequested }}</p>
+    <p>Items:<br/> {{ post.items}}</p>
+    <p>Bounty:<br/> {{ post.bounty}}</p>
+    <button style="margin-top:10px; padding: 6px 15px; font: bold 15px arial, helvetica, sans-serif; border-radius: 15px;border: 2px solid #bbb; background-color: #ddd;" type="submit">Save changes</button>
+  </form>
+</div>
+
+{% endblock %}

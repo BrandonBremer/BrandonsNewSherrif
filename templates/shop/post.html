@@ -1,0 +1,28 @@
+<div class="post" style="color: white;width: 24.7%; display: inline-grid; padding-top: 10px;">
+
+<div style="margin:5px 5px 5px 5px; border: 2px solid; padding: 10px 5px 15px 20px;">
+        Customer: {{post.customer}}<br />
+        Location: {{post.location}}<br />
+        Area : {{post.general_location}}<br />
+        Date Posted: {{post.dateposted}}<br />
+        Date Requested: {{post.daterequested}}<br />
+        Number of Items: {{post.numitems}}<br />
+        Items: {% for item in post.quantity_set.all %}
+        {{item.quantity_food}} {{item.food.item_name}}
+        {% endfor %}<br />
+        Cost: {{post.cost}}<br />
+        Bounty: {{post.bounty}}<br />
+        Status: {{post.status}}<br />
+        Shopper: {{post.shopper}}<br /><br/>
+        {% if post.status == "active" %}
+        {% if post.customer == user %}
+    <a href="{% url 'editpost' postid=post.id %}" style="margin-top:10px; padding: 1px 2px; font: bold 15px arial, helvetica, sans-serif; border-radius: 15px;border: 2px solid #bbb; background-color: #ddd;">Edit</a>
+    {% else %}
+    <a href="{% url 'claimpost' postid=post.id %}" style="margin-top:10px; padding: 1px 2px; font: bold 15px arial, helvetica, sans-serif; border-radius: 15px;border: 2px solid #bbb; background-color: #ddd;">Claim</a>
+    {% endif %}
+    {% endif %}
+</div>
+
+<hr>
+</div>
+

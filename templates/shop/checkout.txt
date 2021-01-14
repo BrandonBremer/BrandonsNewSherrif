@@ -1,0 +1,30 @@
+<!-- shop/templates/shop/checkout.html -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script type="text/javascript">
+
+function setCookie()
+{
+	document.cookie = cart + " " + cost + ";path=checkout/";
+	var c = document.cookie;
+	//split = document.cookie.split(";");
+	//document.write(c);	
+	//document.write(split);
+	//document.cookie = document.cookie.substring(75);
+	//alert(document.cookie.substring(85));
+}
+function displayCookie()
+{
+	alert(document.cookie.substring(85));
+}
+</script>
+<style>
+    body {background-color:  #8AFFB8 ;}
+</style>
+
+<a class="navbar-brand" href="/">Home Page</a>
+<a class="navbar-brand" href="/shop/">Shop!</a>
+
+<div></div>
+
+
